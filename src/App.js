@@ -12,11 +12,12 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <ul>
+          <li><Link to="/Landing">Landing</Link></li>
           <li><Link to="/home">Home</Link></li>
           <li><Link to="/about">About</Link></li>
           <li><Link to="/puppies">Puppies</Link></li>
         </ul>
-
+        <Route path="/Landing" component={Landing} />
         <Route path="/home" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/puppies" component={Puppies} />
@@ -24,6 +25,11 @@ class App extends Component {
       </div>
     );
   }
+}
+const Landing = (props) => {
+  return(
+    <h1>This is the landing page, freaking awesome!</h1>
+  );
 }
 
 const Home = (props) => {
