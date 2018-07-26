@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {Route} from 'react-router-dom';
+import {Route, Link} from 'react-router-dom';
 import NavBar from './NavBar';
 
 class App extends Component {
@@ -12,11 +12,15 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
+
         <NavBar />
+
+
         <Route path="/" exact={true} component={Landing} />
         <Route path="/home" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/puppies" component={Puppies} />
+        <Route path="/puppies/:pup" component={SpecificPuppy} />
 
       </div>
     );
@@ -44,10 +48,38 @@ const About = (props) => {
   );
 }
 
+const formatAsLink = (toUrl, name) => {
+  return(
+    <li><Link to={toUrl}>{name}</Link></li>
+  );
+}
+
 const Puppies = (props) => {
+  console.log(props);
+
+  let allPuppies = [
+    'Chipper',
+    'Max',
+    'Rascal',
+    'Kato'
+  ];
+
   return(
     <div>
       <h1>Puppies are awesome!</h1>
+      <ul>
+        {allPuppies.map(puppy => formatAsLink(`${props.match.url}/${puppy}`, puppy))}
+      </ul>
+    </div>
+  );
+}
+
+const SpecificPuppy = (props) => {
+  console.log(props);
+  return(
+    <div>
+      <h1>Specific Puppies</h1>
+      <h2>{props.match.params.pup}</h2>
     </div>
   );
 }
